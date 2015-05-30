@@ -13,6 +13,9 @@ $(function () {
             html = html.replace("/url/", url);
         }
 
+
+        $("#apps").append(html);
+
     }
 
     addApp("ImageStorm", "assets/app.png", "Rain images from the sky!", "ImageStorm/");
