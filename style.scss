@@ -1,5 +1,6 @@
 //Sass source
-$grey: #DEDEDE;
+$grey: #CCC;
+
 @mixin border-radius($radius) {
     -webkit-border-radius: $radius;
     -moz-border-radius: $radius;
@@ -7,7 +8,39 @@ $grey: #DEDEDE;
     border-radius: $radius;
 }
 
+@keyframes fade-in-shadow {
+    0% {
+        box-shadow: 0px 0px 0px $grey;
+    }
+    100% {
+        box-shadow: 0px 0px 4px $grey;
+    }
+}
+
+
+@keyframes fade-out-shadow {
+    0% {
+        box-shadow: 0px 0px 4px $grey;
+    }
+    100% {
+        box-shadow: 0px 0px 0px $grey;
+    }
+}
+
+
 .app-entry {
-    @include border-radius(10px);
-    border: $grey thin solid;
+    cursor: pointer;
+    animation-duration: 200ms;
+    animation-name: fade-out-shadow;
+}
+
+.app-entry:hover {
+    animation-duration: 200ms;
+    animation-name: fade-in-shadow;
+    box-shadow: 0px 0px 4px $grey;
+}
+
+.app-img {
+    margin-left: auto;
+    margin-right: auto;
 }
