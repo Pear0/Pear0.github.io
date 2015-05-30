@@ -1,2 +1,9 @@
+/* line 10, D:/Development/Web/Pear0.github.io/style.scss */
+.app-entry {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  border: #DEDEDE thin solid; }
 
 /*# sourceMappingURL=style.css.map */
