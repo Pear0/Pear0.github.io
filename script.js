@@ -1,7 +1,10 @@
 /*jshint browser:true */
 /*global $:false, jQuery:false, console:false, escape:false */
 
+var _;
+
 $(function () {
+    _ = this;
 
     function addApp(title, img, body, url) {
         var html = $("#template-app-entry").html();
@@ -18,7 +21,7 @@ $(function () {
 
     }
 
-    for (var i = 0; i < 5; i++)
-        addApp("ImageStorm", "assets/img_storm.png", "Rain images from the sky!", "ImageStorm/");
+
+    addApp("ImageStorm", "assets/img_storm.png", "Rain images from the sky!", "ImageStorm/");
 
 });
