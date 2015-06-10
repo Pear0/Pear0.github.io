@@ -1,10 +1,10 @@
 /*jshint browser:true */
 /*global $:false, jQuery:false, console:false, escape:false */
 
-var _;
+var debug;
 
 $(function () {
-    _ = this;
+    debug = this;
 
     function addApp(title, img, body, url) {
         var html = $("#template-app-entry").html();
