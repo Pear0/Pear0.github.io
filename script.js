@@ -19,6 +19,6 @@ $(function () {
     }
 
 
-    addApp("ImageStorm", "assets/app.png", "Rain images from the sky!", "ImageStorm/");
+    addApp("ImageStorm", "assets/img_storm.png", "Rain images from the sky!", "ImageStorm/");
 
 });
