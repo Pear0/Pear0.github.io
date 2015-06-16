@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<meta name="description" content="William Gulian&apos;s Website">-->
+    <meta name="author" content="William Gulian">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script>
+        var header_shader_waves = true;
+    </script>
+    <script src="jquery-2.1.3.js"></script>
+    <script src="three.min.js"></script>
+    <script src="script.js"></script>
+
+    <script id="shader-vert" type="text/vert" src="shader.vert">
+        #define WAVE_NUMBER 150
+
+        uniform float time;
+        uniform vec2 resolution;
+        uniform vec4 waves[WAVE_NUMBER];
+
+        varying vec2 pos;
+
+        void main() {
+            vec4 p = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            pos = p.xy;
+            gl_Position = p;
+        }
+    </script>
+    <script id="shader-frag" type="text/frag" src="shader.frag">
+
+        #define WAVE_NUMBER 150
+        #define PI 3.1415926535
+        #define ORIG_COLOR 0.15
+
+        uniform float time;
+        uniform vec2 resolution;
+        uniform vec4 waves[WAVE_NUMBER]; //x is s, y is y, z is radius, w is strength
+
+        varying vec2 pos;
+
+        float avg(float a, float b) {
+            return (a + b) / 2.0;
+        }
+
+        void main() {
+            vec2 position = gl_FragCoord.xy;
+            float color = ORIG_COLOR;
+
+            for (int i = 0; i < WAVE_NUMBER; i++) {
+                if (waves[i].w > 0.02) {
+                    float raw = (waves[i].z - distance(position, waves[i].xy)) / 10.0;
+                    if (raw > 0.0 && raw <= 1.0) {
+                        float alpha = min(0.8, 10.0 * waves[i].w / pow(waves[i].z, 1.5));
+
+                        color += sin(raw * PI) * alpha;
+
+                    }
+                }
+            }
+
+
+            vec3 triColor = vec3(color, color, color);
+            //if (position.x / resolution.x > 0.95)
+            //    triColor.x = position.x / resolution.x;
+            //if (position.y / resolution.y > 0.95)
+            //    triColor.y = position.y / resolution.y;
+
+            // feed into our frag colour
+            gl_FragColor = vec4(triColor, 1.0);
+
+        }
+
+    </script>
+
+    <title>Waves</title>
+</head>
+
+<body>
+    <canvas id="canvas" class="full" onselectstart="return false"></canvas>
+</body>
+
+</html>
